@@ -1,0 +1,31 @@
+---
+- name: Update all servers
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Install git
+    package:
+      name: git
+      state: present
+
+- name: Update all servers
+  hosts: web
+  become: yes
+
+  tasks:
+  - name: deploy code on servers
+    git:
+      dest: /var/www/html
+      repo: https://github.com/ritamob/ecomm.git
+
+- name: Update all servers
+  hosts: app
+  become: yes
+    
+  tasks:  
+  - name: deploy code on servers
+    git:
+      dest: /var/www/html
+      repo: https://github.com/ritamob/food.git
+      
